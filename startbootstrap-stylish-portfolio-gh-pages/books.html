@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link href="css/books.css" rel="stylesheet">
 </head>
 <body>
 
@@ -42,11 +43,41 @@
     </ul>
   </div>
 </nav>
-  
-<div class="container">
-  <h3>What We Offer</h3>
-  <p>Books</p>
-</div>
+<div id="root"></div>
+<script>
+      function handleResponse(response) {
+        const app = document.getElementById('root');
+        const container = document.createElement('div');
+        container.setAttribute('class', 'container');
+
+        // app.appendChild(logo);
+        app.appendChild(container);
+        console.log(response.items.length);
+      for (var i = 0; i < response.items.length; i++) {
+        var item = response.items[i];
+        // in production code, item.text should have the HTML entities escaped.
+        const card = document.createElement('div');
+        card.setAttribute('class', 'card');
+
+        const h1 = document.createElement('h1');
+        h1.textContent = item.volumeInfo.title;
+
+        const p = document.createElement('p');
+        console.log(item.volumeInfo.description);
+        item.volumeInfo.description = item.volumeInfo.description.substring(0, 300);
+        p.textContent = `${item.volumeInfo.description}...`;
+
+        container.appendChild(card);
+        card.appendChild(h1);
+        card.appendChild(p);
+        // document.getElementById("content").innerHTML += "<br>" + item.volumeInfo.title;
+      }
+    }
+    </script>
+    <script src="https://www.googleapis.com/books/v1/volumes?q=stress+anxiety+depression&callback=handleResponse"></script>
+
+
+<!-- <script src="js/books.js"></script> -->
 
 </body>
 </html>
