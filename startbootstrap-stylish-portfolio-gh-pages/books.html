@@ -70,6 +70,13 @@
         container.appendChild(card);
         card.appendChild(h1);
         card.appendChild(p);
+        var a = document.createElement('a');
+        var linkText = document.createTextNode("Read More");
+        a.appendChild(linkText);
+        a.classList.add("clicked");
+        a.title = item.volumeInfo.title;
+        a.href = item.volumeInfo.infoLink;
+        card.appendChild(a);
         // document.getElementById("content").innerHTML += "<br>" + item.volumeInfo.title;
       }
     }
